@@ -1,19 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: MyString
   title: MyString
   description: MyString
   author: MyString
-  tags: MyString
-  created_at: MyString
-  updated_at: MyString
+  tags: 
+  created_at: 
+  updated_at: 
 
 two:
-  id: MyString
   title: MyString
   description: MyString
   author: MyString
-  tags: MyString
-  created_at: MyString
-  updated_at: MyString
+  tags: 
+  created_at: 
+  updated_at: 

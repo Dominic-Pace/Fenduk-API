@@ -1,64 +1,41 @@
 class ImportsController < ApplicationController
-  before_action :set_import, only: [:show, :edit, :update, :destroy]
+  before_action :set_import, only: [:show, :update, :destroy]
 
   # GET /imports
-  # GET /imports.json
   def index
     @imports = Import.all
+
+    render json: @imports
   end
 
   # GET /imports/1
-  # GET /imports/1.json
   def show
-  end
-
-  # GET /imports/new
-  def new
-    @import = Import.new
-  end
-
-  # GET /imports/1/edit
-  def edit
+    render json: @import
   end
 
   # POST /imports
-  # POST /imports.json
   def create
     @import = Import.new(import_params)
 
-    respond_to do |format|
-      if @import.save
-        format.html { redirect_to @import, notice: 'Import was successfully created.' }
-        format.json { render :show, status: :created, location: @import }
-      else
-        format.html { render :new }
-        format.json { render json: @import.errors, status: :unprocessable_entity }
-      end
+    if @import.save
+      render json: @import, status: :created, location: @import
+    else
+      render json: @import.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /imports/1
-  # PATCH/PUT /imports/1.json
   def update
-    respond_to do |format|
-      if @import.update(import_params)
-        format.html { redirect_to @import, notice: 'Import was successfully updated.' }
-        format.json { render :show, status: :ok, location: @import }
-      else
-        format.html { render :edit }
-        format.json { render json: @import.errors, status: :unprocessable_entity }
-      end
+    if @import.update(import_params)
+      render json: @import
+    else
+      render json: @import.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /imports/1
-  # DELETE /imports/1.json
   def destroy
     @import.destroy
-    respond_to do |format|
-      format.html { redirect_to imports_url, notice: 'Import was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -67,8 +44,8 @@ class ImportsController < ApplicationController
       @import = Import.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Only allow a trusted parameter "white list" through.
     def import_params
-      params.require(:import).permit(:id, :title, :description, :author, :tags, :created_at, :updated_at)
+      params.require(:import).permit(:title, :description, :author, :tags, :created_at, :updated_at)
     end
 end
